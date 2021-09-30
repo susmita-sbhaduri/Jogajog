@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 import org.bhaduri.jogajog.JPA.MinutedataJpaController;
+import org.bhaduri.nouka.DTO.ScripData;
 
 /**
  *
@@ -21,12 +22,12 @@ public class MinutedataDA extends MinutedataJpaController{
         super(emf);
     }
     
-     public List<String> getScripId() {
+     public List<ScripData> findByScripid(String scripid) {
         EntityManager em = getEntityManager();
-        TypedQuery<String> query = em.createNamedQuery("tarangdb.scripID", String.class);
-        
-        List<String> scripids = query.getResultList();
-        return scripids;
+        TypedQuery<ScripData> query = em.createNamedQuery("Minutedata.findByScripid", ScripData.class);
+        query.setParameter("scripid", scripid);
+        List<ScripData> mindatalistperscrip = query.getResultList();
+        return mindatalistperscrip;
     }
     
 }
