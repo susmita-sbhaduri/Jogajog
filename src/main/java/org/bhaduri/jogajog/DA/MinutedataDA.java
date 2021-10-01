@@ -5,15 +5,12 @@
  */
 package org.bhaduri.jogajog.DA;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 import org.bhaduri.jogajog.JPA.MinutedataJpaController;
 import org.bhaduri.jogajog.entities.Minutedata;
-import org.bhaduri.nouka.DTO.ListScripData;
-import org.bhaduri.nouka.DTO.ScripData;
 
 /**
  *
