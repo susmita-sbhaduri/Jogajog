@@ -5,7 +5,6 @@
  */
 package org.bhaduri.jogajog.services;
 
-import com.sun.javafx.scene.control.skin.VirtualFlow;
 import org.bhaduri.jogajog.DA.MinutedataDA;
 import org.bhaduri.jogajog.JPA.exceptions.PreexistingEntityException;
 import org.bhaduri.jogajog.entities.Minutedata;
