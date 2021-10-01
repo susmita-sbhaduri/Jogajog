@@ -57,31 +57,6 @@ public class MasterDataService {
         }
     }
 
-//     public void getDvripID(String scriptSym) {
-//        MinutedataDA minutedataDA = new MinutedataDA(emf);
-//        try {
-//            MinutedataPK minDataPk = new MinutedataPK();
-//            Minutedata minDataRecord = new Minutedata();
-//
-//            minDataPk.setScripid(scripData.getScripId());
-//            minDataPk.setLastupdateminute(scripData.getLastUpdateTime());
-//
-//            minDataRecord.setMinutedataPK(minDataPk);
-//            minDataRecord.setDayhighprice(scripData.getDayHighPrice());
-//            minDataRecord.setDaylastprice(scripData.getDayLastPrice());
-//            minDataRecord.setDaylowprice(scripData.getDayLowPrice());
-//            minDataRecord.setOpenprice(scripData.getOpenPrice());
-//            minDataRecord.setPrevcloseprice(scripData.getPrevClosePrice());
-//            minDataRecord.setTotaltradedvolume(scripData.getTotalTradedVolume());
-//
-//            minutedataDA.create(minDataRecord);
-////            return HedwigResponseCode.SUCCESS;
-//        }  catch (PreexistingEntityException preexistingEntityException) {
-//            System.out.println("data exists" + scripData.getScripId() + scripData.getLastUpdateTime());
-//        } catch (Exception exception) {
-//            System.out.println(exception + " has occurred in saveSripData.");
-//        }
-//    }
     public ListScripData getScripID() {
         ScripsDA scripsDA = new ScripsDA(emf);
 
@@ -92,10 +67,39 @@ public class MasterDataService {
             for (int i = 0; i < scripidList.size(); i++) { 
                 ScripData scripData = new ScripData();
                 scripData.setScripId(scripidList.get(i).getScripid());
-                listofscripdata.add(i,scripData);
+                listofscripdata.add(scripData);
             } 
             scripdatalist.setScripdatalist(listofscripdata);
             return scripdatalist;
+        } catch (Exception exception) {
+            System.out.println(exception + " has occurred in saveSripData.");
+            return null;
+        }
+
+    }
+    
+    public ListScripData getDataForScripID(ScripData scripid) {
+        MinutedataDA minutedataDA = new MinutedataDA(emf);
+        try {
+            ListScripData mindatalist = new ListScripData();
+            List<ScripData> listofscripdata = new ArrayList<>();
+            
+            List<Minutedata> minutedatas = minutedataDA.findByScripid(scripid.getScripId());
+            for (int i = 0; i < minutedatas.size(); i++) { 
+                ScripData scripData = new ScripData();
+                scripData.setScripId(minutedatas.get(i).getMinutedataPK().getScripid());
+                scripData.setLastUpdateTime(minutedatas.get(i).getMinutedataPK().getLastupdateminute());
+                
+                scripData.setDayHighPrice(minutedatas.get(i).getDayhighprice());
+                scripData.setDayLastPrice(minutedatas.get(i).getDaylastprice());
+                scripData.setDayLowPrice(minutedatas.get(i).getDaylowprice());
+                scripData.setOpenPrice(minutedatas.get(i).getOpenprice());
+                scripData.setPrevClosePrice(minutedatas.get(i).getPrevcloseprice());
+                scripData.setTotalTradedVolume(minutedatas.get(i).getTotaltradedvolume());
+                listofscripdata.add(scripData);
+            } 
+            mindatalist.setScripdatalist(listofscripdata);
+            return mindatalist;
         } catch (Exception exception) {
             System.out.println(exception + " has occurred in saveSripData.");
             return null;
