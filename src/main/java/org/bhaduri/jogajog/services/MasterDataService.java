@@ -27,7 +27,7 @@ public class MasterDataService {
     private EntityManagerFactory emf;
 
     public MasterDataService() {
-        emf = Persistence.createEntityManagerFactory("org.bhaduri_Taranga_jar_1.0-SNAPSHOTPU");
+        emf = Persistence.createEntityManagerFactory("org.bhaduri_Jogajog_jar_1.0-SNAPSHOTPU");
     }
 
     public void insertIntoMinutedata(ScripData scripData) {
