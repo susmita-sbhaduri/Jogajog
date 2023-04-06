@@ -13,7 +13,7 @@ import org.bhaduri.jogajog.JPA.MinutedataJpaController;
 import org.bhaduri.jogajog.entities.Minutedata;
 
 /**
- *
+ * testing
  * @author susmita
  */
 public class MinutedataDA extends MinutedataJpaController{
